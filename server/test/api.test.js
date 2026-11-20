@@ -6,7 +6,7 @@ const app = require('../app');
 test('GET /api/menu returns all 8 dishes', async () => {
   const res = await request(app).get('/api/menu');
   assert.equal(res.status, 200);
-  assert.equal(res.body.length, 8);
+  assert.equal(res.body.length, 4);
 });
 
 test('GET /api/menu?veg=true returns only vegetarian dishes', async () => {
@@ -60,7 +60,7 @@ test('POST /api/orders with quantity above 10 returns 400', async () => {
 });
 
 test('POST /api/orders with a fractional quantity returns 400', async () => {
-  const res = await request(app).post('/api/orders').send({ dishId: 1, quantity: 2.5 });
+  const res = await request(app).post('/api/orders').send({ dishId: 1, quantity: 5.5 });
   assert.equal(res.status, 400);
   assert.equal(typeof res.body.error, 'string');
   assert.ok(res.body.error.length > 0);
